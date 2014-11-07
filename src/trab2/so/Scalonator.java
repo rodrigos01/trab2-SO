@@ -5,10 +5,45 @@
  */
 package trab2.so;
 
+import java.util.Queue;
+
 /**
  *
  * @author rodrigo
  */
-public class Scalonator {
+public class Scalonator implements Runnable {
     
+    private Queue<Process> ready;
+    private final CPU cpu;
+
+    public Scalonator(CPU cpu) {
+        this.cpu = cpu;
+    }
+    
+    public void addProccess(Process p) throws InterruptedException {
+        ready.add(p);
+        cpu.busy.acquire();
+    }
+    
+    public Process nextProcess() {
+        return ready.remove();
+    }
+
+    @Override
+    public void run() {
+        while(true) {
+            try {
+                Process p = nextProcess();
+                if(p != null) {
+
+                    cpu.execute(p);
+                    cpu.busy.acquire();
+                    if(p.getProccessorTime()>0)
+                        addProccess(p);
+                }
+            } catch(InterruptedException e) {
+
+            }
+        }
+    }
 }

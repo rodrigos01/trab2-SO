@@ -5,10 +5,42 @@
  */
 package trab2.so;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author rodrigo
  */
-public class CPU {
+public class CPU implements Runnable {
+    
+    private final Semaphore idle;
+    public Semaphore busy;
+    private Process running;
+
+    public CPU() {
+        idle = new Semaphore(0);
+        busy = new Semaphore(1);
+    }    
+   
+    public void execute(Process p) {
+        running = p;
+        idle.release();
+    }
+
+    @Override
+    public void run() {
+        try {
+            while(true) {
+                idle.acquire();
+                while(running.getProccessorTime()>0) {
+                    Thread.sleep(1000);
+                    running.setProccessorTime(running.getProccessorTime() - 1);
+                }
+                busy.release();
+            }
+        } catch (InterruptedException e) {
+
+        }
+    }
     
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author rodrigo
  */
-public class Process {
+public class Process implements Comparable<Process>{
     
     private int id, proccessorTime, arrivalTime;
     private ArrayList<Device> IOOperations;
@@ -50,6 +50,11 @@ public class Process {
 
     public void addIOOperation(Device dev) {
         this.IOOperations.add(dev);
+    }
+
+    @Override
+    public int compareTo(Process t) {
+        return this.proccessorTime - t.proccessorTime;
     }
     
     
