@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/Trab2SO.java</file>
             <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/CPU.java</file>
             <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/Process.java</file>
             <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/Scalonator.java</file>
-            <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/Trab2SO.java</file>
+            <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/SjfpScalonator.java</file>
+            <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/RoundRobinScalonator.java</file>
         </group>
     </open-files>
 </project-private>

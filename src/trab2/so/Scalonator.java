@@ -13,8 +13,8 @@ import java.util.Queue;
  */
 public class Scalonator implements Runnable {
     
-    private Queue<Process> ready;
-    private final CPU cpu;
+    protected Queue<Process> ready;
+    protected final CPU cpu;
 
     public Scalonator(CPU cpu) {
         this.cpu = cpu;
@@ -26,6 +26,8 @@ public class Scalonator implements Runnable {
     }
     
     public Process nextProcess() {
+        if(ready.isEmpty())
+            return null;
         return ready.remove();
     }
 
