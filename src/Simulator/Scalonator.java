@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trab2.so;
+package Simulator;
 
+import Model.Process;
+import Model.CPU;
 import java.util.Queue;
 
 /**

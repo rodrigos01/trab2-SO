@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trab2.so;
+package Simulator;
 
-import java.util.PriorityQueue;
+import Model.CPU;
+import java.util.LinkedList;
 
 /**
  *
  * @author rodrigo
  */
-public class SjfpScalonator extends Scalonator {
+public class RoundRobinScalonator extends Scalonator {
 
-    public SjfpScalonator(CPU cpu) {
+    public RoundRobinScalonator(CPU cpu) {
         super(cpu);
-        ready = new PriorityQueue<>();
+        ready = new LinkedList<>();
     }
     
 }

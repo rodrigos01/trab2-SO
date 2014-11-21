@@ -3,19 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trab2.so;
+package View;
+
+import java.util.ArrayList;
+import Model.Device;
+import Controller.DeviceTableModel;
+import Model.Process;
 
 /**
  *
  * @author rodrigo
  */
 public class TelaSim extends javax.swing.JFrame {
+    
+    private ArrayList<Device> devices = new ArrayList<>();
+    private ArrayList<Process> procs = new ArrayList<>();
 
     /**
      * Creates new form TelaSim
      */
     public TelaSim() {
         initComponents();
+        
+        devices.add(new Device(30, "Monitor"));
+        
+        devicesTable.setModel(new DeviceTableModel(devices));
+        
     }
 
     /**
@@ -73,6 +86,11 @@ public class TelaSim extends javax.swing.JFrame {
         procLabel.setText("Processos");
 
         addDevicesBtn.setText("+");
+        addDevicesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDevicesBtnActionPerformed(evt);
+            }
+        });
 
         addProcBtn.setText("+");
 
@@ -137,6 +155,10 @@ public class TelaSim extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addDevicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDevicesBtnActionPerformed
+       new TelaDevice(devices).setVisible(true);
+    }//GEN-LAST:event_addDevicesBtnActionPerformed
 
     /**
      * @param args the command line arguments

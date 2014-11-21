@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/TelaSim.java</file>
-            <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/DeviceTableModel.java</file>
-            <file>file:/home/rodrigo/dev/java/trab2-SO/src/trab2/so/Device.java</file>
+            <file>file:/home/rodrigo/dev/java/trab2-SO/src/View/TelaSim.java</file>
+            <file>file:/home/rodrigo/dev/java/trab2-SO/src/View/TelaDevice.java</file>
         </group>
     </open-files>
 </project-private>
