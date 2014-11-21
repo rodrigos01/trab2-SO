@@ -14,7 +14,7 @@ public class Trab2SO {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public void man(String args) {
         CPU pentium = new CPU();
         
         Scalonator scal = new SjfpScalonator(pentium);
