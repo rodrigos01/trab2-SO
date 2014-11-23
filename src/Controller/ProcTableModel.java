@@ -5,57 +5,63 @@
  */
 package Controller;
 
-import Model.Device;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import Model.Process;
 
 /**
  *
  * @author rodrigo
  */
-public class DeviceTableModel extends AbstractTableModel {
+public class ProcTableModel extends AbstractTableModel {
     
-    private final ArrayList<Device> devices;
+    private ArrayList<Process> procs;
 
-    public DeviceTableModel(ArrayList<Device> devices) {
-        this.devices = devices;
+    public ProcTableModel(ArrayList<Process> procs) {
+        this.procs = procs;
     }
-    
+
     @Override
     public int getRowCount() {
-        return devices.size();
+        return procs.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
     
     @Override
     public String getColumnName(int column) {
         switch(column) {
             case 0:
-                return "Nome";
+                return "ID";
             case 1:
-                return "Tempo de Operação";
+                return "Tempo de Chegada";
+            case 2:
+                return "Tempo de Processamento";
         }
         throw new ArrayIndexOutOfBoundsException(column);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Device d = devices.get(rowIndex);
+        Process p = procs.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return d.getName();
+                return p.getId();
             case 1:
-                return d.getOperationTime();
+                return p.getArrivalTime();
+            case 2:
+                return p.getProccessorTime();
         }
         throw new ArrayIndexOutOfBoundsException(columnIndex);
     }
 
-    public ArrayList<Device> getDevices() {
-        return devices;
+    public ArrayList<Process> getProcs() {
+        return procs;
     }
+    
+    
     
 }

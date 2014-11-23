@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.DeviceTableModel;
 import Model.Device;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -15,15 +16,26 @@ import javax.swing.JOptionPane;
  */
 public class TelaDevice extends javax.swing.JFrame {
 
-     private ArrayList<Device> devices;
+    private DeviceTableModel model;
+    private Device device;
     
     /**
      * Creates new form TelaDevice2
      */
-    public TelaDevice(ArrayList<Device> devs) {
+    public TelaDevice(DeviceTableModel m) {
         initComponents();
-        devices = devs;
+        model = m;
     }
+
+    public TelaDevice(Device d, DeviceTableModel m) {
+        initComponents();
+        device = d;
+        model = m;
+        txtNome.setText(d.getName());
+        txtTempo.setText(""+d.getOperationTime());
+    }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,7 +109,8 @@ public class TelaDevice extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "O Nome deve ser inserido");
             } else {
                 Device d = new Device(tempo, nome);
-                devices.add(d);
+                model.getDevices().add(d);
+                model.fireTableDataChanged();
                 txtNome.setText("");
                 txtTempo.setText("");
                 this.setVisible(false);

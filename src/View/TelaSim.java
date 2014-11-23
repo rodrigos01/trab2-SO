@@ -8,6 +8,7 @@ package View;
 import java.util.ArrayList;
 import Model.Device;
 import Controller.DeviceTableModel;
+import Controller.ProcTableModel;
 import Model.Process;
 
 /**
@@ -18,6 +19,8 @@ public class TelaSim extends javax.swing.JFrame {
     
     private ArrayList<Device> devices = new ArrayList<>();
     private ArrayList<Process> procs = new ArrayList<>();
+    private DeviceTableModel devicesModel;
+    private ProcTableModel procModel;
 
     /**
      * Creates new form TelaSim
@@ -25,9 +28,11 @@ public class TelaSim extends javax.swing.JFrame {
     public TelaSim() {
         initComponents();
         
-        devices.add(new Device(30, "Monitor"));
+        devicesModel = new DeviceTableModel(devices);
+        devicesTable.setModel(devicesModel);
         
-        devicesTable.setModel(new DeviceTableModel(devices));
+        procModel = new ProcTableModel(procs);
+        procTable.setModel(procModel);
         
     }
 
@@ -93,6 +98,11 @@ public class TelaSim extends javax.swing.JFrame {
         });
 
         addProcBtn.setText("+");
+        addProcBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProcBtnActionPerformed(evt);
+            }
+        });
 
         algorithmCbx.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SJF-P", "RoundRobin" }));
 
@@ -157,8 +167,12 @@ public class TelaSim extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addDevicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDevicesBtnActionPerformed
-       new TelaDevice(devices).setVisible(true);
+       new TelaDevice(devicesModel).setVisible(true);
     }//GEN-LAST:event_addDevicesBtnActionPerformed
+
+    private void addProcBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProcBtnActionPerformed
+        new TelaProc(devicesModel, procModel).setVisible(true);
+    }//GEN-LAST:event_addProcBtnActionPerformed
 
     /**
      * @param args the command line arguments
