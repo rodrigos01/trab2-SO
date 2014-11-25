@@ -8,6 +8,7 @@ package View;
 import Controller.DeviceTableModel;
 import Model.Device;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,8 @@ public class TelaDevice extends javax.swing.JFrame {
     public TelaDevice(DeviceTableModel m) {
         initComponents();
         model = m;
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public TelaDevice(Device d, DeviceTableModel m) {

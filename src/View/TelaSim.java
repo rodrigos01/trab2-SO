@@ -10,6 +10,7 @@ import Model.Device;
 import Controller.DeviceTableModel;
 import Controller.ProcTableModel;
 import Model.Process;
+import Simulator.*;
 
 /**
  *
@@ -53,7 +54,7 @@ public class TelaSim extends javax.swing.JFrame {
         procLabel = new javax.swing.JLabel();
         addDevicesBtn = new javax.swing.JButton();
         addProcBtn = new javax.swing.JButton();
-        algorithmCbx = new javax.swing.JComboBox();
+        cmbAlgorithm = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         goBtn = new javax.swing.JButton();
 
@@ -104,11 +105,16 @@ public class TelaSim extends javax.swing.JFrame {
             }
         });
 
-        algorithmCbx.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SJF-P", "RoundRobin" }));
+        cmbAlgorithm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SJF-P", "RoundRobin" }));
 
         jLabel1.setText("Algoritimo de Escalonamento");
 
         goBtn.setText("Simular");
+        goBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,7 +129,7 @@ public class TelaSim extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(devicesLabel)
                             .addComponent(procLabel)
-                            .addComponent(algorithmCbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbAlgorithm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -157,7 +163,7 @@ public class TelaSim extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(5, 5, 5)))
-                .addComponent(algorithmCbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbAlgorithm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(goBtn)
                 .addContainerGap())
@@ -173,6 +179,17 @@ public class TelaSim extends javax.swing.JFrame {
     private void addProcBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProcBtnActionPerformed
         new TelaProc(devicesModel, procModel).setVisible(true);
     }//GEN-LAST:event_addProcBtnActionPerformed
+
+    private void goBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBtnActionPerformed
+        if(!procModel.getProcs().isEmpty()) {
+            CPU cpu = new CPU();
+            Scalonator s = new SjfpScalonator(cpu);
+            if(cmbAlgorithm.getSelectedIndex() == 1) {
+                s = new RoundRobinScalonator(cpu);
+            }
+            new TelaSimulator(procs, devices, s).start();
+        }
+    }//GEN-LAST:event_goBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,7 +229,7 @@ public class TelaSim extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDevicesBtn;
     private javax.swing.JButton addProcBtn;
-    private javax.swing.JComboBox algorithmCbx;
+    private javax.swing.JComboBox cmbAlgorithm;
     private javax.swing.JLabel devicesLabel;
     private javax.swing.JTable devicesTable;
     private javax.swing.JButton goBtn;
@@ -223,3 +240,4 @@ public class TelaSim extends javax.swing.JFrame {
     private javax.swing.JTable procTable;
     // End of variables declaration//GEN-END:variables
 }
+

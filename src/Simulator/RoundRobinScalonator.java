@@ -5,7 +5,6 @@
  */
 package Simulator;
 
-import Model.CPU;
 import java.util.LinkedList;
 
 /**
@@ -14,9 +13,23 @@ import java.util.LinkedList;
  */
 public class RoundRobinScalonator extends Scalonator {
 
+    private final int quantum = 4;
+    private int tempo;
+    
     public RoundRobinScalonator(CPU cpu) {
         super(cpu);
+        tempo = 0;
         ready = new LinkedList<>();
+    }
+
+    @Override
+    public void tick() {
+        if(tempo == quantum) {
+            scalonate();
+            tempo = 0;
+        } else {
+            tempo++;
+        }
     }
     
 }

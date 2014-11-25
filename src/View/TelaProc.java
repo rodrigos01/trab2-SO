@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import Model.Process;
 import java.awt.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,6 +42,8 @@ public class TelaProc extends javax.swing.JFrame {
         
         lstOut.setModel(listModelOut);
         lstIn.setModel(listModelIn);
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     public TelaProc(DeviceTableModel dm, ProcTableModel pm, Process p) {
@@ -192,6 +195,7 @@ public class TelaProc extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         for(Object o: lstOut.getSelectedValuesList()) {
+            
             listModelOut.removeElement((Device) o);
             listModelIn.addElement((Device) o);
         }
@@ -207,17 +211,23 @@ public class TelaProc extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         
         try {
-            proc.setArrivalTime(Integer.parseInt(txtArrival.getText()));
-            proc.setProccessorTime(Integer.parseInt(txtProc.getText()));
+            int at = Integer.parseInt(txtArrival.getText());
+            int pt = Integer.parseInt(txtProc.getText());
+            if(pt >= listModelIn.size()){
+                proc.setArrivalTime(at);
+                proc.setProccessorTime(pt);
 
-            while(!listModelIn.isEmpty()) {
-                Device d = listModelIn.remove(0);
-                proc.addIOOperation(d);
+                while(!listModelIn.isEmpty()) {
+                    Device d = listModelIn.remove(0);
+                    proc.addIOOperation(d);
+                }
+
+                procModel.getProcs().add(proc);
+                procModel.fireTableDataChanged();
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "O tempo de processamento deve ser maior ou igual ao numero de Operações de Entrada/Saída");
             }
-
-            procModel.getProcs().add(proc);
-            procModel.fireTableDataChanged();
-            this.setVisible(false);
         } catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "O número inserido é inválido");
         }

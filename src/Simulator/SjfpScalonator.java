@@ -5,8 +5,8 @@
  */
 package Simulator;
 
-import Model.CPU;
 import java.util.PriorityQueue;
+import Model.Process;
 
 /**
  *
@@ -16,7 +16,18 @@ public class SjfpScalonator extends Scalonator {
 
     public SjfpScalonator(CPU cpu) {
         super(cpu);
-        ready = new PriorityQueue<>();
+        ready = new PriorityQueue<Process>();
+    }
+
+    @Override
+    public void tick() {
+        if(ready.isEmpty())
+            return;
+        Process newProcess = ready.element();
+        Process current = cpu.getProccess();
+        if(current == null || newProcess.getProccessorTime() < current.getProccessorTime())
+            scalonate();
+        
     }
     
 }
